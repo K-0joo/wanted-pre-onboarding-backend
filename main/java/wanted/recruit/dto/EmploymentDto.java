@@ -9,14 +9,25 @@ import wanted.recruit.entity.Employment;
 @ToString
 @Getter
 @Setter
-public class EmployForm {
+public class EmploymentDto {
 
     private Long employment_id;
-    private Company company;
+    private Long company_id;
     private String employment_position;
     private int employment_carrot;
     private String employment_content;
     private String used_technique;
+
+    public static EmploymentDto createEmploymentDto(Employment employment) {
+        return new EmploymentDto(
+                employment.getEmployment_id(),
+                employment.getCompany().getCompany_id(),
+                employment.getEmployment_position(),
+                employment.getEmployment_carrot(),
+                employment.getEmployment_content(),
+                employment.getUsed_technique()
+        );
+    }
 
     // 전송받은 제목과 내용을 필드에 저장하는 생성자 추가
 

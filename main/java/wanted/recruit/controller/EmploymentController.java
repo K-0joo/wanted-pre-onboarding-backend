@@ -2,62 +2,75 @@ package wanted.recruit.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import wanted.recruit.dto.EmployForm;
-import wanted.recruit.dto.RecruitDto;
+import wanted.recruit.dto.EmploymentDto;
 import wanted.recruit.entity.Company;
 import wanted.recruit.entity.Employment;
-import wanted.recruit.repository.CompanyRepository;
-import wanted.recruit.repository.EmploymentRepository;
-
-import java.util.List;
-import java.util.Optional;
+import wanted.recruit.service.EmploymentService;
 
 @Slf4j // 로깅 기능을 위한 어노테이션 추가
 @RestController
 @RequestMapping("/recruit")
 public class EmploymentController {
     @Autowired
-    private EmploymentRepository employmentRepository;
-    @Autowired
-    private CompanyRepository companyRepository;
+    private EmploymentService employmentService;
 
-    @PostMapping("/add")
-    public String addEmployment(@RequestBody EmployForm form){
-        log.info(form.toString());
+    // 1. 공고 생성
+    @PostMapping("/add/{company_id}")
+    public ResponseEntity<EmploymentDto> add(@PathVariable Long company_id, @RequestBody EmploymentDto dto){
+        // 서비스에 위임
+        EmploymentDto createdDto = employmentService.create(company_id, dto);
 
-        // Company 객체에 아무것도 없다면 예뢰를 던진다.
-        if (form.getCompany() == null) {
-            throw new RuntimeException("Company information is missing");
-        }
-
-        // Company 개체를 데이터 베이스에서 조회한다.
-        Company company = companyRepository.findById(form.getCompany().getCompany_id())
-                .orElseThrow(() -> new RuntimeException("company not found"));
-
-        // DTO를 엔티티로 변환
-        Employment employment = form.toEntity();
-        employment.setCompany(company); // 조회된 Company 객체 설정
-        log.info(employment.toString());
-
-        Employment saved = employmentRepository.save(employment);
-        log.info(saved.toString());
-
-        // 리파지터리로 엔티티를 DB에 저장
-        return  "{\"message\": \"Employment added successfully\"}";
+        // 결과 응답
+        return ResponseEntity.status(HttpStatus.OK).body(createdDto);
     }
 
-//    @PostMapping("/edit/{id}")
-//    public String editEmployment(@PathVariable Long id){
-//        Employment employmentEntity = employmentRepository.findById(id).orElse(null);
-//        return "";
+//    @PatchMapping("/edit/{id}")
+//    public ResponseEntity<Employment> editEmployment(@PathVariable Long id, @RequestBody EmploymentDto dto){
+//        // DTO 엔티티 변환하기
+//        Employment employment = dto.toEntity();
+//        log.info("id : {}, employment : {}", id, employment.toString());
+//
+//        // 타깃 조회하기
+//        Employment target = employmentRepository.findById(id).orElse(null);
+//
+//        // 잘못된 요청 처리하기
+//        if(target == null || id != employment.getEmployment_id()){
+//            // 400 잘못된 요청 응답!
+//            log.info("잘못된 요청! id : {}, employment : {}", id, employment.toString());
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+//
+//        }
+//
+//        // 업데이트 및 정상 응답(200)하기
+//        target.patch(employment);
+//        Employment updated = employmentRepository.save(employment);
+//        return ResponseEntity.status(HttpStatus.OK).body(updated);
+//
+//        //Employment employmentEntity = employmentRepository.findById(id).orElse(null);
+//        //return "{\"message\": \"Employment edited successfully\"}";
+//    }
+//
+//    @DeleteMapping("/delete/{id}")
+//    public ResponseEntity<Employment> deleteEmployment(@PathVariable Long id){
+//        // 삭제할 대상 찾기
+//        Employment target = employmentRepository.findById(id).orElse(null);
+//
+//        // 잘못된 요청 처리하기
+//        if(target == null){
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+//        }
+//
+//        // 대상 삭제하기
+//        employmentRepository.delete(target);
+//        return ResponseEntity.status(HttpStatus.OK).build();
+//
+//
+//        //return "{\"message\": \"Employment deleted successfully\"}";
 //    }
 
-    @DeleteMapping("/delete")
-    public String deleteEmployment(EmployForm form){
-        return "";
-    }
 
 //    @GetMapping("/list")
 //    public List<RecruitDto> list(){
