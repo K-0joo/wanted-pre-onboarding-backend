@@ -9,6 +9,8 @@ import wanted.recruit.entity.Employment;
 import wanted.recruit.repository.CompanyRepository;
 import wanted.recruit.repository.EmploymentRepository;
 
+import java.util.List;
+
 @Service
 public class EmploymentService {
     @Autowired
@@ -60,5 +62,10 @@ public class EmploymentService {
 
         // 3. 삭제 공고를 DTO로 변환 및 반환
         return EmploymentDto.createEmploymentDto(target);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Employment> findAllEmployments() {
+        return employmentRepository.findAll();
     }
 }

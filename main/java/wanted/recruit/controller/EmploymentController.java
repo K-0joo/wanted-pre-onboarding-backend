@@ -48,28 +48,4 @@ public class EmploymentController {
     }
 
 
-//    @GetMapping("/list")
-//    public List<RecruitDto> list(){
-//        // 모든 데이터 가져오기
-//        List<Employment> employments = (List<Employment>) employmentRepository.findAll();
-//
-//        return employments.stream().map(employment -> {
-//            var company = employment.getCompany();
-//
-//            return new RecruitDto(
-//                    employment.getEmployment_id(),
-//                    company != null ? company.getCompany_name()
-//            )
-//        });
-//    }
-
-//    @GetMapping("/details/{id}")
-//    public String detail(@PathVariable Long id){
-//        log.info("id = " + id);
-//
-//        // id를 조회해 데이터 가져오기
-//        Employment employmentEntity = employmentRepository.findById(id).orElse(null);
-//
-//        return "";
-//    }
 }
