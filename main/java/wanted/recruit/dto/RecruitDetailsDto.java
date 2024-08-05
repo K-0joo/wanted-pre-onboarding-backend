@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @ToString
 @Getter
 @Setter
-public class RecruitDto {
+public class RecruitDetailsDto {
     private Long employment_id;
     private String company_name;
     private String country;
@@ -20,17 +20,23 @@ public class RecruitDto {
     private int employment_carrot;
     private String used_technique;
 
+    private String employment_content;
+    private List<Long> other_employment_ids;
 
-    public static RecruitDto allEmployments(Employment employment){
-        return new RecruitDto(
+    public static RecruitDetailsDto detailEmployment(Employment employment){
+        return new RecruitDetailsDto(
                 employment.getEmployment_id(),
                 employment.getCompany().getCompany_name(),
                 employment.getCompany().getCountry(),
                 employment.getCompany().getRegion(),
                 employment.getEmployment_position(),
                 employment.getEmployment_carrot(),
-                employment.getUsed_technique()
+                employment.getUsed_technique(),
+                employment.getEmployment_content(),
+                employment.getCompany().getEmployments().stream()
+                        .filter(e -> !e.getEmployment_id().equals(employment.getEmployment_id()))
+                        .map(Employment::getEmployment_id)
+                        .collect(Collectors.toList())
         );
     }
-
 }

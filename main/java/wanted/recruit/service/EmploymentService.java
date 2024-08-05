@@ -68,4 +68,10 @@ public class EmploymentService {
     public List<Employment> findAllEmployments() {
         return employmentRepository.findAll();
     }
+
+    @Transactional(readOnly = true)
+    public Employment detailEmployment(Long id){
+        return employmentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("채용 공고를 찾을 수 없습니다!"));
+    }
 }

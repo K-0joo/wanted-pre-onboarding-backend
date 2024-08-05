@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wanted.recruit.dto.EmploymentDto;
+import wanted.recruit.dto.RecruitDetailsDto;
 import wanted.recruit.dto.RecruitDto;
 import wanted.recruit.entity.Company;
 import wanted.recruit.entity.Employment;
@@ -31,17 +32,17 @@ public class ApplicantController {
 
         List<Employment> employments = employmentService.findAllEmployments();
         return employments.stream()
-                .map(RecruitDto::AllEmploymentList)
+                .map(RecruitDto::allEmployments)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/details/{id}")
-    public RecruitDto detail(@PathVariable Long id){
-//        log.info("id = " + id);
-//
-//        // id를 조회해 데이터 가져오기
-//        Employment employmentEntity = employmentRepository.findById(id).orElse(null);
-//
-        return "";
+    public RecruitDetailsDto detail(@PathVariable Long id){
+        log.info("id = " + id);
+
+        // id를 조회해 데이터 가져오기
+        Employment employment = employmentService.detailEmployment(id);
+
+        return RecruitDetailsDto.detailEmployment(employment);
     }
 }

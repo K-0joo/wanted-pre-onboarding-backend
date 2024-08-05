@@ -31,8 +31,8 @@ public class EmploymentDto {
 
     // 전송받은 제목과 내용을 필드에 저장하는 생성자 추가
 
-    public Employment toEntity() {
-        return new Employment(employment_id, null, employment_position, employment_carrot, employment_content, used_technique);
-    }
+//    public Employment toEntity() {
+//        return new Employment(employment_id, null, employment_position, employment_carrot, employment_content, used_technique);
+//    }
 
 }
