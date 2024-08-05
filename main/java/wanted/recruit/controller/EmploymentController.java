@@ -36,24 +36,16 @@ public class EmploymentController {
         // 결과 응답
         return ResponseEntity.status(HttpStatus.OK).body(updatedDto);
    }
-//
-//    @DeleteMapping("/delete/{id}")
-//    public ResponseEntity<Employment> deleteEmployment(@PathVariable Long id){
-//        // 삭제할 대상 찾기
-//        Employment target = employmentRepository.findById(id).orElse(null);
-//
-//        // 잘못된 요청 처리하기
-//        if(target == null){
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-//        }
-//
-//        // 대상 삭제하기
-//        employmentRepository.delete(target);
-//        return ResponseEntity.status(HttpStatus.OK).build();
-//
-//
-//        //return "{\"message\": \"Employment deleted successfully\"}";
-//    }
+
+   // 3. 댓글 삭제
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<EmploymentDto> delete(@PathVariable Long id){
+        // 서비스에 위임
+        EmploymentDto deletdDto = employmentService.delete(id);
+
+        // 결과 응답
+        return ResponseEntity.status(HttpStatus.OK).body(deletdDto);
+    }
 
 
 //    @GetMapping("/list")
