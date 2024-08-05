@@ -6,9 +6,10 @@ import wanted.recruit.company.entity.Company;
 
 @AllArgsConstructor // 모든 필드를 매개변수로 갖는 생성자 자동 생성
 @NoArgsConstructor // 매개변수가 아예 없는 기본 생성자 자동 생성
-@ToString
+@ToString(exclude = "company") // 테스트 중 오류 발생하여 제외 함
 @Entity
 @Getter
+@Setter
 public class Employment {
     @Id // 대표키 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // DB가 자동으로 1씩 증가
