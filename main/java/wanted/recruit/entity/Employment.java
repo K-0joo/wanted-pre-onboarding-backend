@@ -50,18 +50,20 @@ public class Employment {
         );
     }
 
-    public void patch(Employment employment) {
-        if(employment.employment_position != null)
-            this.employment_position = employment.employment_position;
-        if(employment.employment_carrot != 0) {
-            this.employment_carrot = employment.employment_carrot;
-        }
-        if(employment.employment_content != null){
-            this.employment_content = employment.employment_content;
-        }
-        if(employment.used_technique != null){
-            this.used_technique = employment.used_technique;
-        }
+    public void patch(EmploymentDto dto) {
+       // 예외 발생
+        if(this.employment_id != dto.getEmployment_id())
+            throw new IllegalArgumentException("공고 수정 실패! 잘못된 공고 id가 입력됐습니다.");
+
+        // 객체 갱신
+        if(dto.getEmployment_position() != null)
+            this.employment_position = dto.getEmployment_position();
+        if(dto.getEmployment_carrot() != 0)
+            this.employment_carrot = dto.getEmployment_carrot();
+        if(dto.getEmployment_content() != null)
+            this.employment_content = dto.getEmployment_content();
+        if(dto.getUsed_technique() != null)
+            this.used_technique = dto.getUsed_technique();
     }
 
 }

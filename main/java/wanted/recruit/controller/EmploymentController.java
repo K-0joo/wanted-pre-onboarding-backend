@@ -27,31 +27,15 @@ public class EmploymentController {
         return ResponseEntity.status(HttpStatus.OK).body(createdDto);
     }
 
-//    @PatchMapping("/edit/{id}")
-//    public ResponseEntity<Employment> editEmployment(@PathVariable Long id, @RequestBody EmploymentDto dto){
-//        // DTO 엔티티 변환하기
-//        Employment employment = dto.toEntity();
-//        log.info("id : {}, employment : {}", id, employment.toString());
-//
-//        // 타깃 조회하기
-//        Employment target = employmentRepository.findById(id).orElse(null);
-//
-//        // 잘못된 요청 처리하기
-//        if(target == null || id != employment.getEmployment_id()){
-//            // 400 잘못된 요청 응답!
-//            log.info("잘못된 요청! id : {}, employment : {}", id, employment.toString());
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-//
-//        }
-//
-//        // 업데이트 및 정상 응답(200)하기
-//        target.patch(employment);
-//        Employment updated = employmentRepository.save(employment);
-//        return ResponseEntity.status(HttpStatus.OK).body(updated);
-//
-//        //Employment employmentEntity = employmentRepository.findById(id).orElse(null);
-//        //return "{\"message\": \"Employment edited successfully\"}";
-//    }
+    // 2. 공고 수정
+    @PatchMapping("/edit/{id}")
+    public ResponseEntity<EmploymentDto> edit(@PathVariable Long id, @RequestBody EmploymentDto dto){
+        // 서비스에 위임
+        EmploymentDto updatedDto = employmentService.updated(id, dto);
+
+        // 결과 응답
+        return ResponseEntity.status(HttpStatus.OK).body(updatedDto);
+   }
 //
 //    @DeleteMapping("/delete/{id}")
 //    public ResponseEntity<Employment> deleteEmployment(@PathVariable Long id){
