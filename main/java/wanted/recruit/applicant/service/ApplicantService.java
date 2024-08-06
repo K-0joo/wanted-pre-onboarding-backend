@@ -23,4 +23,13 @@ public class ApplicantService {
         return employmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("채용 공고를 찾을 수 없습니다!"));
     }
+
+    @Transactional(readOnly = true)
+    public List<Employment> findEmployments(String name) {
+        if(name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("해당하는 회사 또는 공고를 찾을 수 없습니다.");
+        }
+
+        return employmentRepository.findByCompanyNameContaining(name);
+    }
 }
