@@ -2,8 +2,11 @@ package wanted.recruit.applicant.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import wanted.recruit.applicant.dto.ApplicantDto;
 import wanted.recruit.applicant.dto.RecruitDetailsDto;
 import wanted.recruit.applicant.dto.RecruitDto;
 import wanted.recruit.applicant.service.ApplicantService;
@@ -52,5 +55,11 @@ public class ApplicantController {
         return employments.stream()
                 .map(RecruitDto::allEmployments)
                 .collect(Collectors.toList());
+    }
+
+    @PostMapping("/apply/{employmentId}/{userId}")
+    public ResponseEntity<ApplicantDto> apply(@PathVariable Long employmentId, @PathVariable Long userId, @RequestBody ApplicantDto dto){
+        ApplicantDto createDto = applicantService.apply(employmentId, userId, dto);
+        return ResponseEntity.status(HttpStatus.OK).body(createDto);
     }
 }
