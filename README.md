@@ -48,7 +48,7 @@
 | 채용 공고 삭제 | /recruit/delete/{employment_id} | DELETE |
 | 채용 공고 목록 | /recruit/list | GET |
 | 채용 공고 상세 페이지 및 다른 공고 리스트 | /recruit/details/{employment_id} | GET |
-| 채용 공고 목록 검색 | /recruit/search?name={comany_name_keyword} | GET |
+| 채용 공고 목록 검색 | /recruit/search?search={search_keyword} | GET |
 | 채용 공고 지원 | ~ing | POST |
 
 </br>
@@ -134,12 +134,12 @@ http://localhost:8080/recruit/list
 
 5. 채용 공고 검색 리스트를 가져옵니다.
 ```
-http://localhost:8080/recruit/search?name={comany_name_keyword}
+http://localhost:8080/recruit/search?search={search_keyword}
 ```
 
 </br>
 
-5. 채용 공고 상세 페이지 및 같은 회사 다른 공고 확인
+6. 채용 공고 상세 페이지 및 같은 회사 다른 공고 확인
 ```
 localhost:8080/recruit/details/{employment_id}
 ```
