@@ -36,7 +36,8 @@
 </br>
 
 ## 2. 데이터 모델링 설계
-![Untitled](https://github.com/user-attachments/assets/fe6d680c-8a14-4287-95e7-96b7a7afa7be)
+![Untitled (2)](https://github.com/user-attachments/assets/0ed6fb4f-2d8e-42b5-b8d0-e5ee9d6167c3)
+
 
 </br>
 
