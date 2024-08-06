@@ -97,4 +97,29 @@ class ApplicantServiceTest {
 
         // 만약 log로 "채용 공고를 찾을 수 없습니다!"가 뜬다면 테스트 성공
     }
+
+    @Test
+    void findEmployments_성공() {
+        List<Employment> list = applicantService.findEmployments("원티드");
+
+        assertEquals(2, list.size());
+        assertEquals("백엔드 주니어 개발자", list.get(0).getPosition());
+        assertEquals("원티드랩", list.get(0).getCompany().getName());
+    }
+
+    @Test
+    void findEmployments_실패() {
+        List<Employment> list = applicantService.findEmployments("원티드");
+
+        assertEquals(2, list.size());
+        assertEquals("백엔드 개발자", list.get(0).getPosition());
+        assertEquals("원티드랩", list.get(0).getCompany().getName());
+    }
+
+    @Test
+    void findEmployments_실패_회사공고_없음() {
+        List<Employment> list = applicantService.findEmployments("CJ올리브영");
+
+        assertTrue(list.isEmpty(), "검색 결과가 비어있어야 합니다.");
+    }
 }
