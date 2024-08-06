@@ -55,8 +55,8 @@
 </br>
 
 ## 4. Convention 설계 및 초기 세팅
-- [ Convention 관련 wiki 링크 ](https://github.com/K-0joo/wanted-pre-onboarding-backend/wiki/Coding-Conventions)
-- [ 초기 세팅 관련 wiki 링크 ](https://github.com/K-0joo/wanted-pre-onboarding-backend/wiki/Initialize-Setting-About-SpringBoot)
+- [ Convention 관련 wiki 링크 ](https://github.com/K-0joo/wanted-pre-onboarding-backend/wiki/Coding-Conventions){:target="_blank"}
+- [ 초기 세팅 관련 wiki 링크 ](https://github.com/K-0joo/wanted-pre-onboarding-backend/wiki/Initialize-Setting-About-SpringBoot){:target="_blank"}
 
 </br>
 
@@ -102,7 +102,7 @@
 </br>
 
 ### 5-3. 기능 구현
-- [ 상세한 API 확인 POSTMAN API DOCS ](https://documenter.getpostman.com/view/21360094/2sA3rxpYGF)
+- [ 상세한 API 확인 POSTMAN API DOCS ](https://documenter.getpostman.com/view/21360094/2sA3rxpYGF){:target="_blank"}
 - 아래는 API 테스트할 때 필요한 데이터
 
 </br>
