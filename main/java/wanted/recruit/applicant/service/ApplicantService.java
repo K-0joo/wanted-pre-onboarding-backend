@@ -25,11 +25,12 @@ public class ApplicantService {
     }
 
     @Transactional(readOnly = true)
-    public List<Employment> findEmployments(String name) {
-        if(name == null || name.isEmpty()) {
+    public List<Employment> findEmployments(String search) {
+        if (search == null || search.isEmpty()) {
             throw new IllegalArgumentException("해당하는 회사 또는 공고를 찾을 수 없습니다.");
         }
 
-        return employmentRepository.findByCompanyNameContaining(name);
+
+        return employmentRepository.findBySearchContaining(search);
     }
 }

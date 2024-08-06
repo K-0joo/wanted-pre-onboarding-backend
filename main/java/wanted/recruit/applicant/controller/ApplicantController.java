@@ -44,11 +44,9 @@ public class ApplicantController {
     }
 
     @GetMapping("/search")
-    public List<RecruitDto> search(@RequestParam(value="name", required = false) String name){
-        if(name==null) name="";
+    public List<RecruitDto> search(@RequestParam(value="search", required = false) String search){
 
-        log.info("Search parameter: company_name = " + name);
-        List<Employment> employments = applicantService.findEmployments(name);
+        List<Employment> employments = applicantService.findEmployments(search);
         log.info("Search result: " + employments);
 
         return employments.stream()

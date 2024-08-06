@@ -8,6 +8,9 @@ import wanted.recruit.employment.entity.Employment;
 import java.util.List;
 
 public interface EmploymentRepository extends JpaRepository<Employment, Long> {
-    @Query("SELECT e FROM Employment e WHERE e.company.name LIKE %:name%")
-    List<Employment> findByCompanyNameContaining(@Param("name") String name);
+    @Query("SELECT e FROM Employment e " +
+            "WHERE e.company.name LIKE %:search% " +
+            "OR e.position LIKE %:search% " +
+            "OR e.usedTechnique LIKE %:search% ")
+    List<Employment> findBySearchContaining(@Param("search") String search);
 }
